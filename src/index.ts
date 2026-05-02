@@ -4,12 +4,15 @@ import { getContext } from './assistant/contextManager';
 import { process_user_input } from './assistant/assistant';
 import { getAuthUrl, handleAuthCallback } from './services/google/auth';
 
+import path from 'path';
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../../public')));
 
 app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'healthy', service: 'MakeSense AI' });
